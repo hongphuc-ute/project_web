@@ -1,3 +1,5 @@
+<%@page import="model.Quangcao"%>
+<%@page import="dao.QuangcaoDAOImpl"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Sanpham"%>
 <%@page import="dao.SanphamDAOImpl"%>
@@ -11,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ustora Demo</title>
+        <title>Nhóm 9 Shop</title>
 
         <!-- Google Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -40,84 +42,66 @@
         <header>
             <jsp:include page="header.jsp" flush="true"></jsp:include>
             </header>
-
-            <div class="slider-area">
-                <!-- Slider -->
-                <div class="block-slider block-slider4">
-                    <ul class="" id="bxslider-home4">
+        <%--
+            QuangcaoDAOImpl qcdao = new QuangcaoDAOImpl();
+            List<Quangcao> quangcao = qcdao.getList();
+            request.setAttribute("quangcao", quangcao);
+        --%>
+        <div class="slider-area">
+            <!-- Slider -->
+            <div class="block-slider block-slider4">
+                <ul class="" id="bxslider-home4">
+                    <c:forEach items="${quangcao}" var="qc" >
                         <li>
-                            <img src="img/h4-slide.png" alt="Slide">
+                            <img src="${qc.anh}" alt="">
                             <div class="caption-group">
-                                <h2 class="caption title">
-                                    iPhone <span class="primary">6 <strong>Plus</strong></span>
-                                </h2>
-                                <h4 class="caption subtitle">Dual SIM</h4>
-                                <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                                <%-- <h2 class="caption title">
+                                    <span class="primary"> <strong>${qc.tenQC}</strong></span>
+                                </h2>  --%>              
+                                <c:set var="promotion" scope="session" value="${(qc.gia - 0.5*qc.gia)}"/>
+                                <%--<h4 class="caption subtitle">Giá sốc: ${qc.gia - 10}
+                                    <del>${qc.gia}</del>
+                                </h4>--%>
+                                <a class="caption button-radius" href="ShopServlet"><span class="icon"></span>Shop now</a>
                             </div>
                         </li>
-                        <li><img src="img/h4-slide2.png" alt="Slide">
-                            <div class="caption-group">
-                                <h2 class="caption title">
-                                    by one, get one <span class="primary">50% <strong>off</strong></span>
-                                </h2>
-                                <h4 class="caption subtitle">school supplies & backpacks.*</h4>
-                                <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                            </div>
-                        </li>
-                        <li><img src="img/h4-slide3.png" alt="Slide">
-                            <div class="caption-group">
-                                <h2 class="caption title">
-                                    Apple <span class="primary">Store <strong>Ipod</strong></span>
-                                </h2>
-                                <h4 class="caption subtitle">Select Item</h4>
-                                <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                            </div>
-                        </li>
-                        <li><img src="img/h4-slide4.png" alt="Slide">
-                            <div class="caption-group">
-                                <h2 class="caption title">
-                                    Apple <span class="primary">Store <strong>Ipod</strong></span>
-                                </h2>
-                                <h4 class="caption subtitle">& Phone</h4>
-                                <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- ./Slider -->
-            </div> <!-- End slider area -->
+                    </c:forEach>
+                </ul>
+            </div>
+            <!-- ./Slider -->
+        </div> <!-- End slider area -->
 
-            <div class="promo-area">
-                <div class="zigzag-bottom"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo promo1">
-                                <i class="fa fa-refresh"></i>
-                                <p>30 Days return</p>
-                            </div>
+        <div class="promo-area">
+            <div class="zigzag-bottom"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6" data-toggle="modal" data-target="#return">
+                        <div class="single-promo promo1">
+                            <i class="fa fa-refresh"></i>
+                            <p>Đổi trả trong 30 ngày</p>
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo promo2">
-                                <i class="fa fa-truck"></i>
-                                <p>Free shipping</p>
-                            </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6" data-toggle="modal" data-target="#vanchuyen">
+                        <div class="single-promo promo2">
+                            <i class="fa fa-truck"></i>
+                            <p>Vận chuyển</p>
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo promo3">
-                                <i class="fa fa-lock"></i>
-                                <p>Secure payments</p>
-                            </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6" data-toggle="modal" data-target="#pay">
+                        <div class="single-promo promo3">
+                            <i class="fa fa-lock"></i>
+                            <p>Mua sắm an toàn</p>
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="single-promo promo4">
-                                <i class="fa fa-gift"></i>
-                                <p>New products</p>
-                            </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6" data-toggle="modal" data-target="#new">
+                        <div class="single-promo promo4">
+                            <i class="fa fa-gift"></i>
+                            <p>Sản phẩm mới</p>
                         </div>
                     </div>
                 </div>
-            </div> <!-- End promo area -->
+            </div>
+        </div> <!-- End promo area -->
 
         <%--
             SanphamDAOImpl dao = new SanphamDAOImpl();
@@ -140,14 +124,14 @@
                                             <img src="${sp.anh}" alt="">
                                             <div class="product-hover">
                                                 <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                <a href="singleproduct?maSP=${sp.maSP}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                             </div>
                                         </div>
 
-                                        <h2><a href="single-product.html">${sp.tenSP}</a></h2>
+                                        <h2><a href="singleproduct?maSP=${sp.maSP}">${sp.tenSP}</a></h2>
 
                                         <div class="product-carousel-price">
-                                            <ins>$${sp.gia}</ins> <del>$100.00</del>
+                                            <ins>$${sp.gia}</ins> <del></del>
                                         </div> 
                                     </div>
                                 </c:forEach>

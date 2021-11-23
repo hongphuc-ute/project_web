@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Shop Page- Ustora Demo</title>
+        <title>Shop Page - Nhóm 9 Shop</title>
 
         <!-- Google Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -53,27 +53,22 @@
             </div>
 
 
-        <%
-            SanphamDAOImpl dao = new SanphamDAOImpl();
-            List<Sanpham> sanpham = dao.getList();
-
-            request.setAttribute("sanpham", sanpham);
-        %>
+   
 
         <div class="single-product-area">
             <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
                     <h2 class="section-title">Danh sách sản phẩm</h2>
-                    <c:forEach items="${sanpham}" var="sp" >
+                    <c:forEach items="${listsp}" var="o" >
                         <div class="col-md-3 col-sm-6">
                             <div class="single-shop-product">
                                 <div class="product-upper">
-                                    <img src="${sp.anh}" alt="">
+                                    <img src="${o.anh}" alt="">
                                 </div>
-                                <h2><a href="singleproduct?maSP=${sp.maSP}">${sp.tenSP}</a></h2>
+                                <h2><a href="singleproduct?maSP=${o.maSP}">${o.tenSP}</a></h2>
                                 <div class="product-carousel-price">
-                                    <ins>$${sp.gia}</ins> <del></del>
+                                    <ins>$${o.gia}</ins> <del></del>
                                 </div>  
 
                                 <div class="product-option-shop">

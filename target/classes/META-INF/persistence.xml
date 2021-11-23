@@ -14,7 +14,6 @@
     <class>model.Uathich</class>
     <class>model.Vanchuyen</class>
     <class>model.Thanhtoan</class>
-    <class>model.Category</class>
     <class>model.History</class>
     <class>model.Sanpham</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>

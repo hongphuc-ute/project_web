@@ -193,10 +193,7 @@ public class Cauhinh implements Serializable {
 
     @Override
     public String toString() {
-        return "MaCauHinh" + maCauHinh + "Manhinh" + manHinh + "HeDieuHanh" + heDieuHanh + 
-                "CameraSau" + cameraSau + "CameraTruoc" + cameraTruoc + "CPU" + cpu + 
-                "Ram" + ram + "Rom" + rom + "TheSim" + theSim + "DungLuongPin" + dungLuongPin
-                + "MaSP" + maSP;
+        return "model.Cauhinh[ maCauHinh=" + maCauHinh + " ]";
     }
     
 }

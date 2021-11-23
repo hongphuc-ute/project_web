@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.QuangcaoDAOImpl;
 import dao.SanphamDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Quangcao;
 import model.Sanpham;
 
 /**
@@ -36,8 +38,13 @@ public class SanphamServlet extends HttpServlet {
         SanphamDAOImpl dao = new SanphamDAOImpl();
         List<Sanpham> sanpham = dao.getList();
 
-        request.setAttribute("sanpham", sanpham);
+        QuangcaoDAOImpl daoqc = new QuangcaoDAOImpl();
+        List<Quangcao> qc = daoqc.getList();
 
+        request.setAttribute("sanpham", sanpham);
+        request.setAttribute("quangcao", qc);
+        
+        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

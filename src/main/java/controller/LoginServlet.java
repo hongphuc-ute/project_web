@@ -54,11 +54,10 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 khDAO.login(username, password);
                 Cookie loginCookie = new Cookie("username", username);
-                //setting cookie to expiry in 30 mins
-                loginCookie.setMaxAge(30 * 60);
+                loginCookie.setMaxAge(60 * 60 * 24 * 365 * 2);
                 response.addCookie(loginCookie);
-                response.sendRedirect("index.jsp");
-                url = "/index.jsp";
+                response.sendRedirect("SanphamServlet");
+                url = "/SanphamServlet";
 
             } else {
                 url = "/login.jsp";

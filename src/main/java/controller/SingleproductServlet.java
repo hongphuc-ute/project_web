@@ -5,13 +5,11 @@
  */
 package controller;
 
-
-import dao.CauhinhDAO;
 import dao.CauhinhDAOImpl;
-import dao.SanphamDAO;
 import dao.SanphamDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,14 +37,28 @@ public class SingleproductServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String singleID = request.getParameter("maSP");
         
-        CauhinhDAO dao = new CauhinhDAOImpl();
+        CauhinhDAOImpl dao = new CauhinhDAOImpl();
         Cauhinh sp = dao.getCauhinh(Integer.parseInt(singleID));
         
-        SanphamDAO daosp = new SanphamDAOImpl();
+        SanphamDAOImpl daosp = new SanphamDAOImpl();
         Sanpham sanpham = daosp.getSanpham(Integer.parseInt(singleID));
         
-        request.setAttribute("singleSP", sp);
-        request.setAttribute("sanpham", sanpham);
+        SanphamDAOImpl daolist = new SanphamDAOImpl();
+        List<Sanpham> listsp = daolist.getSanphamByPrice();
+        
+        
+        SanphamDAOImpl daoth = new SanphamDAOImpl();
+        List<Sanpham> listth = daoth.getThuongHieu(sanpham.getThuongHieu());
+        
+        SanphamDAOImpl daoprice = new SanphamDAOImpl();
+        List<Sanpham> listspprice = daoprice.getSanphamByPrice();
+        
+        
+        request.setAttribute("cauhinh", sp);
+        request.setAttribute("singleSP", sanpham);
+        request.setAttribute("splist", listsp);
+        request.setAttribute("th", listth);
+        request.setAttribute("SPprice", listspprice);
         
         
         request.getRequestDispatcher("single-product.jsp").forward(request, response);
